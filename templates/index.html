@@ -1,0 +1,80 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script> 
+	<script src="https://threejs.org/examples/js/libs/stats.min.js"></script>
+    <title>Assignment</title>
+    <script src="//code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
+    <script type="text/javascript" charset="utf-8">
+        $(document).ready(function() {
+
+            namespace = '/test';
+            var socket = io(namespace);
+
+           console.log(("test"));
+		   
+		   socket.on('connect', function() {
+                socket.emit('connection', {data: 'Connection Has Been Established...'});
+            });
+
+            socket.on('my_respons', function(msg) {
+                $('#time').text( $('<div/>').text(msg.data).html());
+                
+                console.log(msg);
+            });
+            
+            $('form#info').submit(function(event) {
+                socket.emit('client', {data: $('#emi_data').val()});
+                return false;
+            });
+			
+			socket.on('response', function(msg, cb) {
+                $('#log').append('<br>' + $('<div/>').text('Event Logs @' + msg.count + ': ' + msg.data).html());
+                if (cb)
+                    cb();
+            });
+			
+			$('form#detach').submit(function(event) {
+                socket.emit('close_socket');
+                return false;
+            });
+            
+        });
+    </script>
+	
+	
+	
+	
+	
+	
+</head>
+<body style="background-color:red;">
+<h1 style="background-color:yellow; align:center" >Client </h1>
+<h2 style="background-color:yellow; align:center" >List Of Logs</h2>
+<div style="background-color:white;" id="log" ></div>
+	<div style="background-color:black;"><h1 style="background-color:blue;">Server Clock</h1> <div><h2 style="background-color:white;" id="time" ></h2></div></div>
+	<div style="background-color:white;">
+	<form id="info" method="POST" action='#'>
+        
+        <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#">
+  Get our server info
+</button>
+    </form><br>
+	
+<form><a href="{{url_for('static',filename = 'datas.txt')}}">Serve Text File</a></form><br>
+<form><a href="{{url_for('static',filename = 'pd.pdf')}}">Serve Pdf File</a></form><br>
+<form><a href="{{url_for('static',filename = 'sam.docx')}}">Serve Word Document File</a></form><br>
+    <form id="detach" method="POST" action="#">
+        <input type="submit" value="Disconnect">
+    </form><br>
+	
+</div>	
+	
+	
+    
+	
+	
+	
+</body>
+</html>

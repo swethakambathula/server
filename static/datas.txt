@@ -1,0 +1,25 @@
+Readme
+
+This readme is a quickstart to ensure that the server is up and running in a nick of time. The instructions are straight forward.
+
+1. Ensure you have Python installed in your machine. Python 3.9 has been used in this project. Internet connectivity is also a necessity
+in case you need to install missing packages.
+
+2. In case of a missing module or dependency, use the command 'pip install <your missing package/module>' on the command prompt.
+
+3. Everything has been provided in the folder but you are at liberty to change the files that are stored at the static folder.
+If you happen to change any of the file, ensure that you either change the new file name to match the one at the html file at the
+templates folder or you change to your new folder name in the html code which is installed in the templates folder.
+
+4. To run the project 'AS IS' basis, open the shell/terminal/command prompt and navigate to the sa.py file which is our server.
+Use the command Python sa.py to start the server.
+
+5. Once the server has started, visit the localhost:8080 to make your request or may be to ascertain that you are in deed connected.
+
+6. You may make changes on the sa.py file to suit your needs.
+
+7. Once you disconnect your server, you will need to manually connect it. By the virtue of the fact that we are using the 'serve.forever()'
+to serve the client, you may find it difficult to stop the server by merely using the ctrl + C. In this case, you will need to terminate or rather
+restart the shell.  
+
+eof
